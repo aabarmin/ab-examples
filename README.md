@@ -1,2 +1,1 @@
-# ab-examples
-Examples for Weekly Tips
+# Examples for Weekly Tips
