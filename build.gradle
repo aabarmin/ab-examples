@@ -1,41 +1,4 @@
-plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.2.5'
-	id 'io.spring.dependency-management' version '1.1.4'
-}
-
 group = 'dev.abarmin.wt'
 version = '0.0.1-SNAPSHOT'
 
-java {
-	sourceCompatibility = '21'
-}
 
-repositories {
-	mavenCentral()
-}
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
-
-bootJar {
-	enabled = false
-}
-
-dependencies {
-	implementation 'com.google.code.gson:gson'
-	implementation 'commons-io:commons-io:2.16.1'
-	implementation 'org.apache.commons:commons-compress:1.26.1'
-
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
-}

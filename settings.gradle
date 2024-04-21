@@ -1,1 +1,6 @@
 rootProject.name = 'examples'
+
+include "apache-compress"
+include "google-gson"
+include "jackson"
+include "java-basic"
