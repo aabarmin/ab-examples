@@ -7,6 +7,6 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
-public final class DigitalDocument extends Document {
+final class DigitalDocument extends Document {
     private String path;
 }

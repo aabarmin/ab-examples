@@ -4,7 +4,7 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
-public class DocumentTypeAdapter implements JsonSerializer<Document>, JsonDeserializer<Document> {
+class DocumentTypeAdapter implements JsonSerializer<Document>, JsonDeserializer<Document> {
     @Override
     public Document deserialize(JsonElement json,
                                 Type typeOfT,
