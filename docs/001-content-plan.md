@@ -8,5 +8,5 @@
 
 ## Jooq
 
-* Basic operations with Jooq
-* Jooq and Spring Boot
+* Basic operations with Jooq.
+* Jooq and Spring Boot - may be joint with the previous one.
