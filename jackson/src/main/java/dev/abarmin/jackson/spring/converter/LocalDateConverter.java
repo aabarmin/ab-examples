@@ -10,14 +10,14 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@JsonComponent
-public class LocalDateConverter extends JsonDeserializer<LocalDate> {
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+public class LocalDateConverter {
+    public static class Deserializer extends JsonDeserializer<LocalDate> {
+        private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-    @Override
-    public LocalDate deserialize(JsonParser p,
-                                          DeserializationContext ctxt) throws IOException, JacksonException {
-        final String dateAsString = ctxt.readValue(p, String.class);
-        return LocalDate.parse(dateAsString, formatter);
+        @Override
+        public LocalDate deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
+            final String dateAsString = ctxt.readValue(p, String.class);
+            return LocalDate.parse(dateAsString, formatter);
+        }
     }
 }
