@@ -1,10 +1,12 @@
 package dev.abarmin.jackson.spring.model;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 
+@Getter
 @RequiredArgsConstructor
 public enum DocumentType {
     PAPER("Paper Document"),
