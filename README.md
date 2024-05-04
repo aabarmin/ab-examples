@@ -12,6 +12,7 @@
 
 * [Jackson custom serializers and deserializers](./jackson/docs/001-custom-serializers.md)
 * [Jackson annotated types](./jackson/docs/002-include-type-information.md)
+* [Registering custom Jackson serializers and deserializers in Spring Boot](./jackson/docs/003-jackson-and-spring.md)
 
 ### Java
 
