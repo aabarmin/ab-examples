@@ -2,6 +2,7 @@ package dev.abarmin.junit.extension.custom;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -21,5 +22,10 @@ class JUnitBasicTest {
     @DisplayName("Test with custom parameter")
     void testWithCustomParameter(@MyParameter int randomValue) {
         log.info("Value is {}", randomValue);
+    }
+
+    @RepeatedTest(3)
+    void repeated() {
+        log.info("Repeated");
     }
 }
