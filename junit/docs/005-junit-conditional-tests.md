@@ -1,34 +1,25 @@
-package dev.abarmin.junit.basics;
+# JUnit 5 Conditional tests
 
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.EnabledForJreRange;
-import org.junit.jupiter.api.condition.EnabledIf;
-import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
-import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
-import org.junit.jupiter.api.condition.EnabledInNativeImage;
-import org.junit.jupiter.api.condition.EnabledOnJre;
-import org.junit.jupiter.api.condition.EnabledOnOs;
-import org.junit.jupiter.api.condition.JRE;
-import org.junit.jupiter.api.condition.OS;
+It's possible to switch on and off tests based on some conditions. 
 
-import java.util.Random;
+## Always disabled test
 
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
+It's possible to explain a reason why the test is disabled: 
 
-@Slf4j
-class JUnitConditionalTest {
+```java
     @Test
     @DisplayName("Always disabled test")
     @Disabled("Because I can disable the test")
     void alwaysDisabledTest() {
         log.info("Always disabled");
     }
+```
 
+## Based on operation's system architecture
+
+Can be used with both `@EnabledOnOs` and `@DisabledOnOs`:
+
+```java
     @Nested
     @DisplayName("By operation system")
     class OperationSystem {
@@ -56,7 +47,13 @@ class JUnitConditionalTest {
             log.info("This is Intel test");
         }
     }
+```
 
+## By JRE
+
+Different tests for different JRE versions, both `@EnabledOnJre` and `@DisabledOnJre` are supported: 
+
+```java
     @Nested
     @DisplayName("By JRE")
     class Jre {
@@ -78,7 +75,11 @@ class JUnitConditionalTest {
             log.info("Up to Java 17");
         }
     }
+```
 
+## Tests for GraalVM native images
+
+```java
     @Nested
     @DisplayName("Native images")
     class NativeImages {
@@ -88,7 +89,13 @@ class JUnitConditionalTest {
             log.info("Only for native images");
         }
     }
+```
 
+## Based on system properties
+
+Property is obtained via `System.getProperty()`
+
+```java
     @Nested
     @DisplayName("By system properties")
     class SystemProperties {
@@ -99,7 +106,13 @@ class JUnitConditionalTest {
             log.info("Apple silicon test");
         }
     }
+```
 
+## Based on environment variable
+
+Variable can be obtained via `System.getenv()`
+
+```java
     @Nested
     @DisplayName("By environment variables")
     class EnvironmentVariables {
@@ -118,7 +131,13 @@ class JUnitConditionalTest {
             log.info(System.getenv("GRADLE_HOME"));
         }
     }
+```
 
+## Custom conditions
+
+Method that represents a condition may be declared in the same class: 
+
+```java
     @Nested
     @DisplayName("With custom conditions")
     class CustomCondition {
@@ -132,7 +151,15 @@ class JUnitConditionalTest {
         boolean myCondition() {
             return new Random().nextBoolean();
         }
+    }
+```
 
+Or in the external class: 
+
+```java
+    @Nested
+    @DisplayName("With custom conditions")
+    class CustomCondition {
         @Test
         @DisplayName("With custom external condition")
         @EnabledIf("dev.abarmin.junit.basics.ExternalCondition#anotherCondition")
@@ -141,6 +168,18 @@ class JUnitConditionalTest {
         }
     }
 
+    public class ExternalCondition {
+        static public boolean anotherCondition() {
+            return new Random().nextBoolean();
+        }
+    }    
+```
+
+## Assumptions
+
+Allow to execute part of the test only when condition is met. If not met, the test will not be executed: 
+
+```java
     @Nested
     @DisplayName("With assumptions")
     class WithAssumption {
@@ -158,4 +197,4 @@ class JUnitConditionalTest {
             log.info("This is executed only when gradle is installed as a package");
         }
     }
-}
+```

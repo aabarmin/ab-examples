@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @Slf4j
-public class JUnitParameteriseTest {
+public class JUnitParameterisedTest {
     @Nested
     @DisplayName("Enumerated values")
     class EnumeratedValues {
@@ -112,7 +112,7 @@ public class JUnitParameteriseTest {
                 "second, 2",
                 "third, 3"
         })
-        void withArgumentAggregation(ArgumentsAccessor accessor) {
+        void withArgumentAccessor(ArgumentsAccessor accessor) {
             String str = accessor.getString(0);
             Integer number = accessor.getInteger(1);
 
