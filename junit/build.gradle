@@ -1,0 +1,28 @@
+plugins {
+    id 'java-library'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.5'
+}
+
+apply from: "../build.common.gradle"
+
+bootJar {
+    enabled = false
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+task slowTests(type: Test) {
+    useJUnitPlatform {
+        includeTags("Slow")
+    }
+}
+
+task quickTests(type: Test) {
+    useJUnitPlatform {
+        includeTags("Quick")
+    }
+}
