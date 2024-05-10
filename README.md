@@ -18,7 +18,7 @@
 
 * [Read and write ZIP files with plain Java](./java-basic/docs/001-read-write-zip.md)
 
-# JUnit 5
+### JUnit 5
 
 * [Change a display name of a test and define a timeout](./junit/docs/001-junit-basics.md)
 * [Change name of a test](./junit/docs/002-junit-test-name-generation.md)
