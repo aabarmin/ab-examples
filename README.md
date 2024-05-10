@@ -4,6 +4,10 @@
 
 * [Read and write ZIP files with Apache Commons Compress](./apache-compress/docs/001-create-zip.md)
 
+### Flyway
+
+* [Database migrations with Flyway](./flyway/docs/001-basic-migrations.md)
+
 ### GSON
 
 * [GSON custom serializers and deserializers](./google-gson/docs/001-custom-type-adapter.md)
