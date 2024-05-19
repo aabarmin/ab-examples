@@ -22,6 +22,11 @@
 
 * [Read and write ZIP files with plain Java](./java-basic/docs/001-read-write-zip.md)
 
+### Jooq
+
+* [Generate classes with Jooq Gradle Plugin](./jooq/docs/001-generate-classes-with-jooq-plugin.md)
+* [Make queries with Jooq](./jooq/docs/002-make-queries-with-jooq.md)
+
 ### JUnit 5
 
 * [Change a display name of a test and define a timeout](./junit/docs/001-junit-basics.md)
