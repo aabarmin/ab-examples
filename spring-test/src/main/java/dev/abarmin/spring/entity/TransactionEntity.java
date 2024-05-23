@@ -1,5 +1,6 @@
 package dev.abarmin.spring.entity;
 
+import dev.abarmin.spring.model.TransactionStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -28,6 +29,9 @@ public class TransactionEntity {
 
     @Column(name = "ACCOUNT_TO")
     private long accountTo;
+
+    @Column(name = "TRANSACTION_STATUS")
+    private TransactionStatus status;
 
     @Embedded
     private MoneyEntity amount;

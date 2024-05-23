@@ -1,6 +1,7 @@
 package dev.abarmin.spring.controller;
 
-import dev.abarmin.spring.model.Money;
+import dev.abarmin.spring.model.CreateTransactionRequest;
+import dev.abarmin.spring.model.GetTransactionsResponse;
 import dev.abarmin.spring.model.Transaction;
 import dev.abarmin.spring.service.TransactionService;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.Collection;
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/transactions")
@@ -23,7 +21,7 @@ public class TransactionController {
 
     @GetMapping
     public ResponseEntity<GetTransactionsResponse> getTransactions() {
-        return ResponseEntity.ok(new GetTransactionsResponse(List.of()));
+        return ResponseEntity.ok(new GetTransactionsResponse(transactionService.findAll()));
     }
 
     @PostMapping
@@ -34,17 +32,5 @@ public class TransactionController {
                         .path("/{id}")
                         .build(createdTransaction.id()))
                 .build();
-    }
-}
-
-record GetTransactionsResponse(Collection<Transaction> transactions) {
-}
-
-record CreateTransactionRequest(long from,
-                                long to,
-                                Money amount) {
-
-    Transaction toTransaction() {
-        return new Transaction(null, from, to, amount);
     }
 }

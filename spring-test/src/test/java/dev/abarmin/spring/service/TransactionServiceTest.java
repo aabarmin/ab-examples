@@ -5,6 +5,7 @@ import dev.abarmin.spring.converter.TransactionConverterImpl;
 import dev.abarmin.spring.entity.TransactionEntity;
 import dev.abarmin.spring.model.Money;
 import dev.abarmin.spring.model.Transaction;
+import dev.abarmin.spring.model.TransactionStatus;
 import dev.abarmin.spring.repository.TransactionRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ class TransactionServiceTest {
             return entity;
         });
 
-        Transaction originalTransaction = new Transaction(null, 1L, 2L, Money.of(10, "GBP"));
+        Transaction originalTransaction = new Transaction(null, 1L, 2L, Money.of(10, "GBP"), TransactionStatus.AUTHORISED);
         Transaction createdTransaction = transactionService.createTransaction(originalTransaction);
 
         assertThat(createdTransaction.id()).isNotNull();

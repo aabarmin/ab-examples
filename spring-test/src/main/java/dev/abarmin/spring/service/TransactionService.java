@@ -7,6 +7,8 @@ import dev.abarmin.spring.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service
 @RequiredArgsConstructor
 public class TransactionService {
@@ -17,5 +19,12 @@ public class TransactionService {
         TransactionEntity transactionEntity = converter.toEntity(transaction);
         TransactionEntity savedTransaction = repository.save(transactionEntity);
         return converter.fromEntity(savedTransaction);
+    }
+
+    public Collection<Transaction> findAll() {
+        return repository.findAll()
+                .stream()
+                .map(converter::fromEntity)
+                .toList();
     }
 }
