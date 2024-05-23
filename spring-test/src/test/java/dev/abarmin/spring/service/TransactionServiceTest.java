@@ -1,5 +1,6 @@
 package dev.abarmin.spring.service;
 
+import dev.abarmin.spring.client.BalanceServiceClient;
 import dev.abarmin.spring.converter.MoneyConverterImpl;
 import dev.abarmin.spring.converter.TransactionConverterImpl;
 import dev.abarmin.spring.entity.TransactionEntity;
@@ -8,8 +9,12 @@ import dev.abarmin.spring.model.Transaction;
 import dev.abarmin.spring.model.TransactionStatus;
 import dev.abarmin.spring.repository.TransactionRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,6 +26,7 @@ import static org.mockito.Mockito.when;
         MoneyConverterImpl.class,
         TransactionConverterImpl.class
 })
+@MockBean(BalanceServiceClient.class)
 class TransactionServiceTest {
     @Autowired
     TransactionService transactionService;
