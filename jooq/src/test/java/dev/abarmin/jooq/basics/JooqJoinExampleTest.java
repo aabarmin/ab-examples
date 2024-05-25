@@ -31,11 +31,16 @@ public class JooqJoinExampleTest extends ConnectionSupport {
     @Test
     void selectPeopleWithTasks() {
         withContext(dslContext -> {
-            var fields = new ArrayList<Field<?>>();
+            /*
+            select person.*, task.*
+            from person
+            inner join task on task.person_id = person.id
+             */
+            List<Field<?>> fields = new ArrayList<>();
             fields.addAll(Arrays.asList(PERSON.fields()));
             fields.addAll(Arrays.asList(TASK.fields()));
 
-            var people = new HashMap<Integer, PersonWithTasks>();
+            Map<Integer, PersonWithTasks> people = new HashMap<>();
             final List<PersonWithTasks> records = dslContext.select(fields)
                     .from(PERSON)
                     .innerJoin(TASK).on(TASK.PERSON_ID.eq(PERSON.ID))
@@ -51,18 +56,16 @@ public class JooqJoinExampleTest extends ConnectionSupport {
                         ));
 
                         final TaskRecord taskRecord = record.into(TASK);
-                        final PersonTask personTask = new PersonTask(
+                        personWithTasks.addTask(new PersonTask(
                                 taskRecord.getId(),
                                 taskRecord.getSubject(),
                                 taskRecord.getStatus()
-                        );
-
-                        personWithTasks.addTask(personTask);
+                        ));
 
                         return personWithTasks;
                     });
 
-            System.out.println(records);
+            System.out.println(people.values());
         });
     }
 
