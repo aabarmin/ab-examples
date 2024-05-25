@@ -5,6 +5,7 @@ package dev.abarmin.jooq.db;
 
 
 import dev.abarmin.jooq.db.tables.Person;
+import dev.abarmin.jooq.db.tables.Task;
 
 
 /**
@@ -17,4 +18,9 @@ public class Tables {
      * The table <code>PUBLIC.PERSON</code>.
      */
     public static final Person PERSON = Person.PERSON;
+
+    /**
+     * The table <code>PUBLIC.TASK</code>.
+     */
+    public static final Task TASK = Task.TASK;
 }
