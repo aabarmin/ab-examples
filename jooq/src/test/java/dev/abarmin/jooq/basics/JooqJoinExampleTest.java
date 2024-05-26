@@ -12,6 +12,7 @@ import java.util.*;
 
 import static dev.abarmin.jooq.db.Tables.PERSON;
 import static dev.abarmin.jooq.db.Tables.TASK;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class JooqJoinExampleTest extends ConnectionSupport {
     @Test
@@ -24,7 +25,11 @@ public class JooqJoinExampleTest extends ConnectionSupport {
                     .orderBy(DSL.count(TASK.ID).asc())
                     .fetch();
 
-            System.out.println(records);
+            assertThat(records).isNotEmpty();
+            for (Record2<String, Integer> record : records) {
+                assertThat(record.get(PERSON.NAME)).isNotEmpty();
+                assertThat(record.get(DSL.count(TASK.ID))).isPositive();
+            }
         });
     }
 
@@ -41,7 +46,7 @@ public class JooqJoinExampleTest extends ConnectionSupport {
             fields.addAll(Arrays.asList(TASK.fields()));
 
             Map<Integer, PersonWithTasks> people = new HashMap<>();
-            final List<PersonWithTasks> records = dslContext.select(fields)
+            dslContext.select(fields)
                     .from(PERSON)
                     .innerJoin(TASK).on(TASK.PERSON_ID.eq(PERSON.ID))
                     .orderBy(PERSON.ID.asc())
@@ -65,7 +70,10 @@ public class JooqJoinExampleTest extends ConnectionSupport {
                         return personWithTasks;
                     });
 
-            System.out.println(people.values());
+            assertThat(people.values()).allSatisfy(person -> {
+                assertThat(person.name()).isNotEmpty();
+                assertThat(person.tasks()).isNotEmpty();
+            });
         });
     }
 
