@@ -5,6 +5,7 @@ package dev.abarmin.jooq.db;
 
 
 import dev.abarmin.jooq.db.tables.Person;
+import dev.abarmin.jooq.db.tables.Task;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +34,11 @@ public class Public extends SchemaImpl {
     public final Person PERSON = Person.PERSON;
 
     /**
+     * The table <code>PUBLIC.TASK</code>.
+     */
+    public final Task TASK = Task.TASK;
+
+    /**
      * No further instances allowed
      */
     private Public() {
@@ -48,7 +54,8 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
-            Person.PERSON
+            Person.PERSON,
+            Task.TASK
         );
     }
 }
