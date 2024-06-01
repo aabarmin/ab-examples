@@ -1,10 +1,9 @@
 package dev.abarmin.spring.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.abarmin.spring.model.CreateTransactionRequest;
+import dev.abarmin.spring.model.AuthorisationRequest;
+import dev.abarmin.spring.model.AuthorisationResponse;
 import dev.abarmin.spring.model.Money;
-import dev.abarmin.spring.model.Transaction;
-import dev.abarmin.spring.model.TransactionStatus;
 import dev.abarmin.spring.service.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +46,10 @@ class TransactionControllerTest {
     void saveTransactions_shouldReturnHeaderWithSaved() throws Exception {
         Money amount = Money.of(10, "GBP");
         String requestBody = objectMapper
-                .writeValueAsString(new CreateTransactionRequest(1, 2, amount));
+                .writeValueAsString(new AuthorisationRequest(1, 2, amount));
 
-        when(transactionService.createTransaction(any(Transaction.class)))
-                .thenReturn(new Transaction(1L, 1, 2, amount, TransactionStatus.AUTHORISED));
+        when(transactionService.authorise(any(AuthorisationRequest.class)))
+                .thenReturn(new AuthorisationResponse(1L, Money.of(10, "GBP")));
 
         mockMvc.perform(post("/transactions")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)

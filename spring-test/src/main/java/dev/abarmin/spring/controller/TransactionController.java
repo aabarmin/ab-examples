@@ -1,8 +1,8 @@
 package dev.abarmin.spring.controller;
 
-import dev.abarmin.spring.model.CreateTransactionRequest;
+import dev.abarmin.spring.model.AuthorisationRequest;
+import dev.abarmin.spring.model.AuthorisationResponse;
 import dev.abarmin.spring.model.GetTransactionsResponse;
-import dev.abarmin.spring.model.Transaction;
 import dev.abarmin.spring.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +25,12 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createTransaction(@RequestBody CreateTransactionRequest request) {
-        Transaction createdTransaction = transactionService.createTransaction(request.toTransaction());
+    public ResponseEntity<AuthorisationResponse> authorise(@RequestBody AuthorisationRequest request) {
+        final AuthorisationResponse response = transactionService.authorise(request);
         return ResponseEntity
                 .created(ServletUriComponentsBuilder.fromCurrentRequest()
                         .path("/{id}")
-                        .build(createdTransaction.id()))
+                        .build(response.transactionId()))
                 .build();
     }
 }
