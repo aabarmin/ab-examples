@@ -7,8 +7,6 @@ import com.sun.net.httpserver.HttpHandler;
 import dev.abarmin.spring.model.Money;
 import lombok.Setter;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -17,14 +15,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Setter
-@Component
 public class BalanceHandler implements HttpHandler {
     private final Pattern balancePattern = Pattern.compile("/balance/(\\d+)/reserve");
 
-    @Autowired
     private BalanceService balanceService;
-
-    @Autowired
     private ObjectMapper objectMapper;
 
     @Override
