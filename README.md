@@ -45,4 +45,4 @@
 #### Spring Context
 
 * [Define Spring beans by using XML configuration](./spring-context/docs/001-define-beans-in-xml.md)
-* [Define Spring beans by using Java configuration](./spring-context/docs/002-define-beans-by-using-java)
+* [Define Spring beans by using Java configuration](./spring-context/docs/002-define-beans-by-using-java.md)
