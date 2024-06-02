@@ -2,6 +2,8 @@ package dev.abarmin.jooq.basics;
 
 import lombok.SneakyThrows;
 import org.flywaydb.core.Flyway;
+import org.jooq.DSLContext;
+import org.jooq.impl.DSL;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.nio.file.Files;
@@ -23,6 +25,13 @@ public abstract class ConnectionSupport {
                 .dataSource(DB_URL, DB_USER, DB_PASSWORD)
                 .load()
                 .migrate();
+    }
+
+    void withContext(Consumer<DSLContext> consumer) {
+        withConnection(connection -> {
+            final DSLContext dslContext = DSL.using(connection);
+            consumer.accept(dslContext);
+        });
     }
 
     @SneakyThrows
