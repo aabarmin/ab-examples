@@ -1,6 +1,6 @@
-package com.account.balance.service;
+package dev.abarmin.balance.app.service;
 
-import dev.abarmin.spring.model.Money;
+import dev.abarmin.balance.common.model.Money;
 
 public class BalanceService {
     public boolean reserve(long accountId, Money amount) {

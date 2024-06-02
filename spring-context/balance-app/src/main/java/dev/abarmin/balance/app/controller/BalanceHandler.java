@@ -1,10 +1,10 @@
-package com.account.balance.controller;
+package dev.abarmin.balance.app.controller;
 
-import com.account.balance.service.BalanceService;
+import dev.abarmin.balance.app.service.BalanceService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import dev.abarmin.spring.model.Money;
+import dev.abarmin.balance.common.model.Money;
 import lombok.Setter;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 

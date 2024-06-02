@@ -1,7 +1,7 @@
-package com.account.balance.config;
+package dev.abarmin.balance.app.config;
 
-import com.account.balance.controller.BalanceHandler;
-import com.account.balance.service.BalanceService;
+import dev.abarmin.balance.app.controller.BalanceHandler;
+import dev.abarmin.balance.app.service.BalanceService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 

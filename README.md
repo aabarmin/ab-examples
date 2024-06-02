@@ -39,3 +39,10 @@
 * [Parameterised tests](./junit/docs/008-junit-parameterised-tests.md)
 * [Dynamic test generator](./junit/docs/009-junit-dynamic-tests.md)
 * [Custom extensions](./junit/docs/010-junit-extension.md)
+
+### Spring Framework
+
+#### Spring Context
+
+* [Define Spring beans by using XML configuration](./spring-context/docs/001-define-beans-in-xml.md)
+* [Define Spring beans by using Java configuration](./spring-context/docs/002-define-beans-by-using-java)

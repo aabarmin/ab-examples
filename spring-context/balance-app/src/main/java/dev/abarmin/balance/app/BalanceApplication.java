@@ -1,9 +1,9 @@
-package com.account.balance;
+package dev.abarmin.balance.app;
 
-import com.account.balance.config.BalanceConfiguration;
-import com.account.balance.config.ObjectMapperConfiguration;
-import com.account.balance.controller.BalanceHandler;
-import com.account.balance.service.BalanceService;
+import dev.abarmin.balance.app.config.BalanceConfiguration;
+import dev.abarmin.balance.app.config.ObjectMapperConfiguration;
+import dev.abarmin.balance.app.controller.BalanceHandler;
+import dev.abarmin.balance.app.service.BalanceService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -43,6 +43,6 @@ public class BalanceApplication {
     }
 
     private static ApplicationContext getContextWithComponentScan() {
-        return new AnnotationConfigApplicationContext("com.account.balance");
+        return new AnnotationConfigApplicationContext("dev.abarmin.balance.app");
     }
 }
