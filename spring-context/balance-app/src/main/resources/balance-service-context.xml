@@ -3,12 +3,20 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="dev.abarmin.balance.app.controller.BalanceHandler">
+    <bean class="dev.abarmin.balance.app.handler.BalanceHandler">
         <property name="objectMapper" ref="objectMapper" />
         <property name="balanceService" ref="balanceService" />
     </bean>
 
     <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
 
-    <bean id="balanceService" class="dev.abarmin.balance.app.service.BalanceService" />
+    <bean id="balanceService" class="dev.abarmin.balance.app.service.BalanceService">
+        <property name="processors">
+            <list>
+                <ref bean="loggingBalanceProcessor" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="loggingBalanceProcessor" class="dev.abarmin.balance.app.service.processor.LoggingBalanceProcessor" />
 </beans>

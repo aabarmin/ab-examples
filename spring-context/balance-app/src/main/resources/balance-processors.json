@@ -1,0 +1,14 @@
+{
+  "processors": [
+    {
+      "limit": 1,
+      "message": "Hello starter, you have at least 1 USD!",
+      "name": "starterProcessor"
+    },
+    {
+      "limit": 2,
+      "message": "Hello friend, you have at least 2 USD!",
+      "name": "friendProcessor"
+    }
+  ]
+}

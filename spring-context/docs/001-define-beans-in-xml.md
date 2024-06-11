@@ -19,7 +19,7 @@ And put bean definitions in the XML file like this:
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
             http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="dev.abarmin.balance.app.controller.BalanceHandler">
+    <bean class="dev.abarmin.balance.app.handler.BalanceHandler">
         <property name="objectMapper" ref="objectMapper" />
         <property name="balanceService" ref="balanceService" />
     </bean>

@@ -1,6 +1,6 @@
 package dev.abarmin.balance.app.config;
 
-import dev.abarmin.balance.app.controller.BalanceHandler;
+import dev.abarmin.balance.app.handler.BalanceHandler;
 import dev.abarmin.balance.app.service.BalanceService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.context.annotation.UserConfigurations;

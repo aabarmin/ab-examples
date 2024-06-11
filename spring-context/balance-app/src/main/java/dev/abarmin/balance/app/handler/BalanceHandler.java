@@ -1,12 +1,13 @@
-package dev.abarmin.balance.app.controller;
+package dev.abarmin.balance.app.handler;
 
-import dev.abarmin.balance.app.service.BalanceService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import dev.abarmin.balance.app.service.BalanceService;
 import dev.abarmin.balance.common.model.Money;
 import lombok.Setter;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -18,7 +19,10 @@ import java.util.regex.Pattern;
 public class BalanceHandler implements HttpHandler {
     private final Pattern balancePattern = Pattern.compile("/balance/(\\d+)/reserve");
 
+    @Autowired
     private BalanceService balanceService;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     @Override
