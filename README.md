@@ -41,3 +41,20 @@
 * [Parameterised tests](./junit/docs/008-junit-parameterised-tests.md)
 * [Dynamic test generator](./junit/docs/009-junit-dynamic-tests.md)
 * [Custom extensions](./junit/docs/010-junit-extension.md)
+
+### Spring Framework
+
+#### Spring Context
+
+* [Define Spring beans by using XML configuration](./spring-context/docs/001-define-beans-in-xml.md)
+* [Define Spring beans by using Java configuration](./spring-context/docs/002-define-beans-by-using-java.md)
+
+## Spring Context Customization
+
+* [Logging bean names with Spring Bean Post Processor](./spring-context/docs/003-logging-bean-names-with-bpp.md)
+* [Customizing bean definitions with Spring Bean Factory Post Processor](./spring-context/docs/004-customizing-bean-definitions-with-bfpp.md)
+* [Registering custom bean definitions with Bean Definition Registry Post Processor](./spring-context/docs/005-registering-custom-bean-definitions-programmatically.md)
+
+## Spring Boot
+
+* [How to create a Spring Boot Starter](./spring-context/docs/006-spring-boot-starter.md)

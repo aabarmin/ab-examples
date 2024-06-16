@@ -1,0 +1,15 @@
+plugins {
+    id 'java-library'
+}
+
+apply from: "../../build.common.gradle"
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+dependencies {
+
+}
