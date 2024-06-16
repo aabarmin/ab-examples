@@ -1,5 +1,7 @@
 package dev.abarmin.spring.model;
 
+import dev.abarmin.balance.common.model.Money;
+
 import java.time.LocalDateTime;
 import java.util.Collection;
 

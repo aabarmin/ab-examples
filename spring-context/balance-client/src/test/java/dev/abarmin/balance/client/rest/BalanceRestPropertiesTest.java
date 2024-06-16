@@ -1,5 +1,6 @@
-package dev.abarmin.spring.config;
+package dev.abarmin.balance.client.rest;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,28 +11,26 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @ExtendWith(SpringExtension.class)
-class BalanceServicePropertiesTest {
+class BalanceRestPropertiesTest {
     @Nested
-    @EnableConfigurationProperties(BalanceServiceProperties.class)
+    @EnableConfigurationProperties(BalanceRestProperties.class)
     @TestPropertySource(properties = {
             "integration.balance-service.endpoint.base-url=http://test"
     })
     class WithPropertySource {
         @Autowired
-        BalanceServiceProperties properties;
+        BalanceRestProperties properties;
 
         @Test
         void contextLoaded_propertiesSet() {
-            assertThat(properties).isNotNull();
-            assertThat(properties.getEndpoint().getBaseUrl()).isEqualTo("http://test");
+            Assertions.assertThat(properties).isNotNull();
+            Assertions.assertThat(properties.getEndpoint().getBaseUrl()).isEqualTo("http://test");
         }
     }
 
     @Nested
-    @EnableConfigurationProperties(BalanceServiceProperties.class)
+    @EnableConfigurationProperties(BalanceRestProperties.class)
     class WithDynamicPropertySource {
         @DynamicPropertySource
         static void loadProperties(DynamicPropertyRegistry registry) {
@@ -41,12 +40,12 @@ class BalanceServicePropertiesTest {
         }
 
         @Autowired
-        BalanceServiceProperties properties;
+        BalanceRestProperties properties;
 
         @Test
         void contextLoaded_propertiesSet() {
-            assertThat(properties).isNotNull();
-            assertThat(properties.getEndpoint().getBaseUrl()).isEqualTo("http://test");
+            Assertions.assertThat(properties).isNotNull();
+            Assertions.assertThat(properties.getEndpoint().getBaseUrl()).isEqualTo("http://test");
         }
     }
 }

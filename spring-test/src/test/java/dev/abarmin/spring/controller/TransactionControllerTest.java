@@ -1,9 +1,9 @@
 package dev.abarmin.spring.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.abarmin.balance.common.model.Money;
 import dev.abarmin.spring.model.AuthorisationRequest;
 import dev.abarmin.spring.model.AuthorisationResponse;
-import dev.abarmin.spring.model.Money;
 import dev.abarmin.spring.service.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

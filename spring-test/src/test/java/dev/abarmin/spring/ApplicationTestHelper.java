@@ -1,7 +1,7 @@
 package dev.abarmin.spring;
 
+import dev.abarmin.balance.common.model.Money;
 import dev.abarmin.spring.model.AuthorisationRequest;
-import dev.abarmin.spring.model.Money;
 
 public class ApplicationTestHelper {
     static AuthorisationRequest createRequest() {

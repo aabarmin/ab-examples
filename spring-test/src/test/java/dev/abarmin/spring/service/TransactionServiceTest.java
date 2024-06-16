@@ -1,6 +1,7 @@
 package dev.abarmin.spring.service;
 
-import dev.abarmin.spring.client.BalanceServiceClient;
+import dev.abarmin.balance.client.BalanceClient;
+import dev.abarmin.balance.common.model.Money;
 import dev.abarmin.spring.converter.AuthoriseRequestConverter;
 import dev.abarmin.spring.converter.MoneyConverterImpl;
 import dev.abarmin.spring.converter.StepConverterImpl;
@@ -8,7 +9,6 @@ import dev.abarmin.spring.converter.TransactionConverterImpl;
 import dev.abarmin.spring.entity.TransactionEntity;
 import dev.abarmin.spring.model.AuthorisationRequest;
 import dev.abarmin.spring.model.AuthorisationResponse;
-import dev.abarmin.spring.model.Money;
 import dev.abarmin.spring.repository.TransactionRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
         TransactionConverterImpl.class,
         AuthoriseRequestConverter.class
 })
-@MockBean(BalanceServiceClient.class)
+@MockBean(BalanceClient.class)
 class TransactionServiceTest {
     @Autowired
     TransactionService transactionService;

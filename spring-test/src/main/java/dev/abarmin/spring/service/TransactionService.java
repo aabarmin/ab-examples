@@ -1,6 +1,6 @@
 package dev.abarmin.spring.service;
 
-import dev.abarmin.spring.client.BalanceServiceClient;
+import dev.abarmin.balance.client.BalanceClient;
 import dev.abarmin.spring.converter.AuthoriseRequestConverter;
 import dev.abarmin.spring.converter.TransactionConverter;
 import dev.abarmin.spring.entity.TransactionEntity;
@@ -20,11 +20,11 @@ public class TransactionService {
     private final AuthoriseRequestConverter requestConverter;
     private final TransactionRepository repository;
     private final TransactionConverter converter;
-    private final BalanceServiceClient balanceServiceClient;
+    private final BalanceClient balanceClient;
 
     @Transactional
     public AuthorisationResponse authorise(AuthorisationRequest request) {
-        balanceServiceClient.reserve(request.from(), request.amount());
+        balanceClient.reserve(request.from(), request.amount());
         final TransactionEntity transaction = requestConverter.toEntity(request);
         final TransactionEntity savedTransaction = repository.save(transaction);
         return new AuthorisationResponse(savedTransaction.getId(), request.amount());

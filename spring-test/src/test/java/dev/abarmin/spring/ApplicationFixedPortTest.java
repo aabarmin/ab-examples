@@ -1,6 +1,6 @@
 package dev.abarmin.spring;
 
-import dev.abarmin.spring.client.BalanceServiceClient;
+import dev.abarmin.balance.client.BalanceClient;
 import dev.abarmin.spring.model.GetTransactionsResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class ApplicationFixedPortTest {
     @TestConfiguration
     static class MyConfig {
         @MockBean
-        BalanceServiceClient balanceServiceClient;
+        BalanceClient balanceClient;
     }
 
     @Test

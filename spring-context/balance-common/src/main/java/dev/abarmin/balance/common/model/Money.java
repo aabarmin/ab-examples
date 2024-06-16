@@ -12,4 +12,8 @@ public record Money(BigDecimal amount,
         }
         return amount.compareTo(another.amount) > 0;
     }
+
+    public static Money of(int amount, String currency) {
+        return new Money(BigDecimal.valueOf(amount), Currency.getInstance(currency));
+    }
 }

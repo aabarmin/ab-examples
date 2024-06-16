@@ -1,7 +1,7 @@
 package dev.abarmin.spring.converter;
 
+import dev.abarmin.balance.common.model.Money;
 import dev.abarmin.spring.entity.MoneyEntity;
-import dev.abarmin.spring.model.Money;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

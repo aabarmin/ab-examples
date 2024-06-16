@@ -1,4 +1,4 @@
-package dev.abarmin.spring.config;
+package dev.abarmin.balance.client.rest;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
@@ -8,9 +8,10 @@ import org.springframework.validation.annotation.Validated;
 
 @Data
 @Validated
-@Deprecated
-@ConfigurationProperties(prefix = "integration.balance-service")
-public class BalanceServiceProperties {
+@ConfigurationProperties("integration.balance-service")
+public class BalanceRestProperties {
+    private boolean enabled = true;
+
     @Valid
     private Endpoint endpoint = new Endpoint();
 
