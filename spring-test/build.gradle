@@ -1,6 +1,6 @@
 plugins {
     id 'java-library'
-    id 'org.springframework.boot' version '3.3.0'
+    id 'org.springframework.boot' version '3.3.1'
     id 'io.spring.dependency-management' version '1.1.5'
 }
 
@@ -30,5 +30,5 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    testImplementation 'org.wiremock:wiremock-standalone:3.6.0'
+    testImplementation 'org.wiremock:wiremock-standalone:3.7.0'
 }
