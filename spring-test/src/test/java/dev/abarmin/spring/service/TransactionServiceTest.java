@@ -13,26 +13,33 @@ import dev.abarmin.spring.repository.TransactionRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-@SpringJUnitConfig(classes = {
+@SpringJUnitConfig({
         TransactionService.class,
         MoneyConverterImpl.class,
-        StepConverterImpl.class,
         TransactionConverterImpl.class,
-        AuthoriseRequestConverter.class
+        StepConverterImpl.class
 })
+@SpyBean(AuthoriseRequestConverter.class)
+@MockBean(TransactionRepository.class)
 @MockBean(BalanceClient.class)
 class TransactionServiceTest {
     @Autowired
     TransactionService transactionService;
 
-    @MockBean
+    @Autowired
     TransactionRepository transactionRepository;
+
+    @Autowired
+    AuthoriseRequestConverter requestConverter;
 
     @Test
     void createTransaction_savesProvidedTransaction() {
@@ -46,5 +53,10 @@ class TransactionServiceTest {
         final AuthorisationResponse response = transactionService.authorise(request);
 
         assertThat(response.transactionId()).isNotNull();
+
+        verify(transactionRepository).save(any(TransactionEntity.class));
+        verifyNoMoreInteractions(transactionRepository);
+
+        verify(requestConverter).toEntity(any(AuthorisationRequest.class));
     }
 }
