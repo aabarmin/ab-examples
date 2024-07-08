@@ -6,12 +6,12 @@ import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @JdbcTest
-@PerformDatabaseMigration
 @SqlGroup({
         @Sql(statements = "delete from STEPS", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD),
         @Sql(statements = "delete from TRANSACTIONS", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
