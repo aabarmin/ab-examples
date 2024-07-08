@@ -9,8 +9,9 @@ import javax.sql.DataSource;
 
 public class DatabaseMigrationListener implements TestExecutionListener {
     @Override
-    public void beforeTestClass(TestContext testContext) throws Exception {
-        DataSource dataSource = TestContextTransactionUtils.retrieveDataSource(testContext, "dataSource");
+    public void prepareTestInstance(TestContext testContext) throws Exception {
+        DataSource dataSource = TestContextTransactionUtils
+                .retrieveDataSource(testContext, "dataSource");
 
         Flyway.configure()
                 .dataSource(dataSource)
