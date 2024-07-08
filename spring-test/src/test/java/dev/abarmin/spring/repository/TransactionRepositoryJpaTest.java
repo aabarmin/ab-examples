@@ -1,14 +1,11 @@
 package dev.abarmin.spring.repository;
 
-import dev.abarmin.spring.entity.MoneyEntity;
 import dev.abarmin.spring.entity.TransactionEntity;
-import dev.abarmin.spring.model.TransactionStatus;
+import dev.abarmin.spring.entity.TransactionEntityFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-
-import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,15 +20,7 @@ class TransactionRepositoryJpaTest {
 
     @Test
     void findById_shouldBeAbleToReadViaRepository() {
-        TransactionEntity transactionEntity = TransactionEntity.builder()
-                .accountFrom(1L)
-                .accountTo(2L)
-                .amount(MoneyEntity.builder()
-                        .amount(BigDecimal.TEN)
-                        .currency("GBP")
-                        .build())
-                .status(TransactionStatus.AUTHORISED)
-                .build();
+        TransactionEntity transactionEntity = TransactionEntityFactory.createAuthorised(1, 2, 10);
 
         TransactionEntity persistedEntity = entityManager.persist(transactionEntity);
 
