@@ -9,6 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.net.URI;
 
@@ -19,8 +22,12 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlMatching;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ApplicationRandomPortTest {
+    @Container
+    static PostgreSQLContainer DB = new PostgreSQLContainer();
+
     @RegisterExtension
     static WireMockExtension wireMock = WireMockExtension.newInstance()
             .options(wireMockConfig()
@@ -30,10 +37,11 @@ class ApplicationRandomPortTest {
 
     @DynamicPropertySource
     static void properties(DynamicPropertyRegistry registry) {
-        registry.add(
-                "integration.balance-service.endpoint.base-url",
-                () -> wireMock.baseUrl()
-        );
+        registry.add("integration.balance-service.endpoint.base-url", wireMock::baseUrl);
+        registry.add("spring.datasource.url", DB::getJdbcUrl);
+        registry.add("spring.datasource.username", DB::getUsername);
+        registry.add("spring.datasource.password", DB::getPassword);
+        registry.add("spring.test.database.replace", () -> false);
     }
 
     @Test
