@@ -1,0 +1,61 @@
+version: "3"
+
+networks:
+  default:
+
+volumes:
+  prometheus-data:
+  application-data:
+
+services:
+  loki:
+    image: grafana/loki:2.9.2
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - default
+
+  promtail:
+    image: grafana/promtail:2.9.2
+    volumes:
+      - /var/log:/var/log
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - default
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus-data:/prometheus
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - default
+
+  grafana:
+    environment:
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    image: grafana/grafana:latest
+    volumes:
+      - ./config/grafana:/etc/grafana/provisioning/datasources
+    ports:
+      - "3000:3000"
+    networks:
+      - default
+
+  service:
+    image: spring-test:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - "SPRING_DATASOURCE_URL=jdbc:h2:file:/opt/application-data/database"
+      - "SPRING_PROFILES_ACTIVE=production"
+      - "LOGS_APPLICATION_LOKI_BASE_URL=http://loki:3100"
+    volumes:
+      - application-data:/opt/application-data
+    networks:
+      - default
