@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <springProperty name="applicationName"
+                    source="spring.application.name"
+                    defaultValue="myApp" />
+    <springProperty name="lokiAddress"
+                    source="logs.application.loki.base-url"
+                    defaultValue="http://localhost:3100" />
+
+    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+        <http>
+            <url>${lokiAddress}/loki/api/v1/push</url>
+        </http>
+        <format>
+            <label>
+                <pattern>app=${applicationName},host=${HOSTNAME}</pattern>
+            </label>
+            <message class="com.github.loki4j.logback.JsonLayout" />
+        </format>
+    </appender>
+</included>
