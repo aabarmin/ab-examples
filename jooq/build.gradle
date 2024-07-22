@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath 'com.h2database:h2:2.2.224'
+        classpath 'com.h2database:h2:2.3.230'
     }
 }
 
