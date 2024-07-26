@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="~{layout.html}"
+      xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="">
+<head>
+    <title>Users</title>
+</head>
+<body>
+<th:block layout:fragment="main-content">
+    <div class="row">
+        <div class="col-12">
+            <h1>
+                Create or edit a user
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/web/users}">
+                        Back
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <form th:action="@{/web/users}" method="post" th:object="${user}">
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" th:field="*{username}" />
+                    </div>
+
+                    <div class="invalid-feedback"
+                         th:if="${#fields.hasErrors('username')}"
+                         th:errors="*{username}" />
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" th:field="*{password}" />
+                    </div>
+
+                    <div class="invalid-feedback"
+                         th:if="${#fields.hasErrors('password')}"
+                         th:errors="*{password}" />
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Authorities</label>
+                    <div class="col-sm-10">
+                        <select class="form-control"
+                                multiple
+                                th:field="*{authorities}">
+                            <option th:each="a : ${authorities}"
+                                    th:text="${a}"
+                                    th:value="${a}" />
+                        </select>
+                    </div>
+
+                    <div class="invalid-feedback"
+                         th:if="${#fields.hasErrors('password')}"
+                         th:errors="*{password}" />
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

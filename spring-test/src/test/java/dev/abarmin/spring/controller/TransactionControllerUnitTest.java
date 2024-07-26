@@ -1,6 +1,7 @@
 package dev.abarmin.spring.controller;
 
 import dev.abarmin.balance.common.model.Money;
+import dev.abarmin.spring.controller.rest.TransactionController;
 import dev.abarmin.spring.model.AuthorisationRequest;
 import dev.abarmin.spring.model.AuthorisationResponse;
 import dev.abarmin.spring.model.GetTransactionsResponse;

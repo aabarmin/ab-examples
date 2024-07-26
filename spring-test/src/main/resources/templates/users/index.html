@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="~{layout.html}"
+      xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="">
+<head>
+    <title>Users</title>
+</head>
+<body>
+<th:block layout:fragment="main-content">
+    <div class="row">
+        <div class="col-12">
+            <h1>
+                Users
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/web/users/add}">
+                        Add user
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <tr>
+                    <th>Username</th>
+                    <th>Authorities</th>
+                </tr>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.username}" />
+                    <td>
+                        <ul>
+                            <li th:each="a : ${user.authorities}"
+                                th:text="${a.authority}" />
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>
