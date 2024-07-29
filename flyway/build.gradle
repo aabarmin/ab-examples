@@ -1,12 +1,12 @@
 buildscript {
     dependencies {
-        classpath 'com.h2database:h2:2.2.224'
+        classpath 'com.h2database:h2:2.3.230'
     }
 }
 
 plugins {
     id 'java-library'
-    id 'org.springframework.boot' version '3.3.1'
+    id 'org.springframework.boot' version '3.3.2'
     id 'io.spring.dependency-management' version '1.1.6'
     id 'org.flywaydb.flyway' version '10.15.2'
 }

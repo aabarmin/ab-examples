@@ -16,14 +16,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @Testcontainers
-@PerformDatabaseMigration
 class TransactionRepositoryJpaContainerTest {
     @Container
     static PostgreSQLContainer DB = new PostgreSQLContainer();
 
     @DynamicPropertySource
-    static void propertySource(DynamicPropertyRegistry registry) {
+    static void properties(DynamicPropertyRegistry registry) {
         registry.add("spring.datasource.url", () -> DB.getJdbcUrl());
+        registry.add("spring.datasource.username", () -> DB.getUsername());
+        registry.add("spring.datasource.password", () -> DB.getPassword());
+        registry.add("spring.test.database.replace", () -> false);
     }
 
     @Autowired
