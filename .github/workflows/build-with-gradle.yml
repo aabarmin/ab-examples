@@ -33,8 +33,6 @@ jobs:
         uses: "gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5"
       - name: "Build with Gradle"
         run: "./gradlew build"
-        env:
-          SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
       - name: "Compress test results"
         if: always()
         shell: bash
