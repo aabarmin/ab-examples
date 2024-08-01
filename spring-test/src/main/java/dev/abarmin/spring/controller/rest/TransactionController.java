@@ -1,4 +1,4 @@
-package dev.abarmin.spring.controller;
+package dev.abarmin.spring.controller.rest;
 
 import dev.abarmin.spring.model.AuthorisationRequest;
 import dev.abarmin.spring.model.AuthorisationResponse;

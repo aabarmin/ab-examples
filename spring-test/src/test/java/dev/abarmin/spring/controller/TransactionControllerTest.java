@@ -2,11 +2,16 @@ package dev.abarmin.spring.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.abarmin.balance.common.model.Money;
+import dev.abarmin.spring.controller.rest.TransactionController;
+import dev.abarmin.spring.converter.MoneyConverterImpl;
+import dev.abarmin.spring.converter.StepConverterImpl;
+import dev.abarmin.spring.converter.TransactionConverter;
 import dev.abarmin.spring.model.AuthorisationRequest;
 import dev.abarmin.spring.model.AuthorisationResponse;
 import dev.abarmin.spring.service.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
@@ -25,7 +30,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
+@WebMvcTest(value = {
+        TransactionController.class,
+        TransactionConverter.class,
+        MoneyConverterImpl.class,
+        StepConverterImpl.class
+}, excludeAutoConfiguration = SecurityAutoConfiguration.class)
 class TransactionControllerTest {
     @MockBean
     TransactionService transactionService;

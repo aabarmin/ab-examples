@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="~{layout.html}"
+      xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="">
+<head>
+    <title>Transactions</title>
+</head>
+<body>
+<th:block layout:fragment="main-content">
+    <div class="row">
+        <div class="col-12">
+            <h1>
+                Transactions
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <tr>
+                    <th>Id</th>
+                    <th>Account From</th>
+                    <th>Account To</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+                <tr th:each="tx : ${transactions}">
+                    <td th:text="${tx.id}" />
+                    <td th:text="${tx.accountFrom}" />
+                    <td th:text="${tx.accountTo}" />
+                    <td th:text="${tx.amount}" />
+                    <td th:text="${tx.status}" />
+                </tr>
+            </table>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>
