@@ -35,6 +35,26 @@ jobs:
         run: "./gradlew build"
         env:
           SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      - name: "Compress test results"
+        if: always()
+        shell: bash
+        run: |
+          tar -czf test-results.tar.gz \
+            ./apache-compress/build/reports \
+            ./flyway/build/reports \
+            ./google-gson/build/reports \
+            ./jackson/build/reports \
+            ./java-basic/build/reports \
+            ./jooq/build/reports \
+            ./junit/build/reports \
+            ./spring-test/build/reports
+      - name: "Store test results"
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "test_results"
+          path: test-results.tar.gz
+          retention-days: 1
   dependency-submission:
     runs-on: "ubuntu-latest"
     permissions:
