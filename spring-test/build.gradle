@@ -42,7 +42,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-testcontainers'
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:postgresql'
-    testImplementation 'org.wiremock:wiremock-standalone:3.8.0'
+    testImplementation 'org.wiremock:wiremock-standalone:3.9.0'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
