@@ -3,6 +3,7 @@ package dev.abarmin.spring.controller.web;
 import dev.abarmin.spring.controller.web.model.UserForm;
 import dev.abarmin.spring.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,6 +28,11 @@ public class UserWebController {
     private final UserDetailsManager userManager;
     private final PasswordEncoder passwordEncoder;
 
+    @ModelAttribute("authorities")
+    public Collection<String> authorities() {
+        return List.of("admin", "user");
+    }
+
     @GetMapping
     public String index(Model model,
                         Authentication authentication) {
@@ -35,14 +41,10 @@ public class UserWebController {
     }
 
     @GetMapping("/add")
+    @PreAuthorize("hasAnyAuthority('admin')")
     public String createNew(Model model) {
         model.addAttribute("user", new UserForm());
         return "users/edit";
-    }
-
-    @ModelAttribute("authorities")
-    public Collection<String> authorities() {
-        return List.of("admin", "user");
     }
 
     @PostMapping

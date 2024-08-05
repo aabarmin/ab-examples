@@ -5,7 +5,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
@@ -24,6 +26,7 @@ import javax.sql.DataSource;
 
 @Slf4j
 @Configuration
+@EnableMethodSecurity
 public class SecurityConfiguration {
     @Bean
     @Order(0)
@@ -55,7 +58,12 @@ public class SecurityConfiguration {
         return http
                 .authorizeHttpRequests(authorise -> authorise
                         .requestMatchers("/webjars/**").permitAll()
-                        .requestMatchers("/web/users").hasAuthority("admin")
+
+                        // might be replaced with @EnableMethodSecurity and @PreAuthorise
+//                        .requestMatchers("/web/users").hasAnyAuthority("admin", "user")
+//                        .requestMatchers("/web/users/add").hasAuthority("admin")
+//                        .requestMatchers(HttpMethod.POST, "/web/users").hasAuthority("admin")
+
                         .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults())
                 .build();

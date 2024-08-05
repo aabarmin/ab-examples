@@ -1,28 +1,32 @@
-package dev.abarmin.spring.controller;
+package dev.abarmin.spring.controller.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.abarmin.balance.common.model.Money;
-import dev.abarmin.spring.controller.rest.TransactionController;
+import dev.abarmin.spring.config.SecurityConfiguration;
 import dev.abarmin.spring.converter.MoneyConverterImpl;
 import dev.abarmin.spring.converter.StepConverterImpl;
-import dev.abarmin.spring.converter.TransactionConverter;
+import dev.abarmin.spring.converter.TransactionConverterImpl;
 import dev.abarmin.spring.model.AuthorisationRequest;
 import dev.abarmin.spring.model.AuthorisationResponse;
 import dev.abarmin.spring.service.TransactionService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.endsWith;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -30,12 +34,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(value = {
+@WebMvcTest({
         TransactionController.class,
-        TransactionConverter.class,
+        TransactionConverterImpl.class,
         MoneyConverterImpl.class,
-        StepConverterImpl.class
-}, excludeAutoConfiguration = SecurityAutoConfiguration.class)
+        StepConverterImpl.class,
+        SecurityConfiguration.class
+})
+@MockBean(UserDetailsManager.class)
 class TransactionControllerTest {
     @MockBean
     TransactionService transactionService;
@@ -43,16 +49,23 @@ class TransactionControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
-    @Autowired
     MockMvc mockMvc;
+
+    @BeforeEach
+    void setUp(WebApplicationContext context) {
+        mockMvc = MockMvcBuilders
+                .webAppContextSetup(context)
+                .apply(springSecurity())
+                .alwaysDo(print())
+                .build();
+    }
 
     @Test
     void getTransactions_shouldReturnList() throws Exception {
         mockMvc.perform(get("/transactions"))
                 .andExpect(status().isOk())
                 .andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(jsonPath("$.transactions").isArray())
-                .andDo(print());
+                .andExpect(jsonPath("$.transactions").isArray());
 
         verify(transactionService).findAll();
         verifyNoMoreInteractions(transactionService);
@@ -72,7 +85,6 @@ class TransactionControllerTest {
                                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                                 .content(requestBody))
                 .andExpect(status().isCreated())
-                .andDo(print())
                 .andExpect(header().string(HttpHeaders.LOCATION, endsWith("/transactions/1")));
     }
 
@@ -81,7 +93,6 @@ class TransactionControllerTest {
         mockMvc.perform(post("/transactions")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                         .content("[]"))
-                .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
 }
