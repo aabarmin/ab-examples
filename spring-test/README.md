@@ -10,3 +10,4 @@
 # Spring Security
 
 * [Integration between Spring Security and MockMvc](./docs/007-spring-security-and-mock-mvc.md)
+* [Spring Security OAuth2 Client aka Google Login](./docs/008-spring-security-oauth2-client.md)

@@ -7,6 +7,13 @@ spring:
     hibernate:
       ddl-auto: none
     open-in-view: false
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${OAUTH_GOOGLE_CLIENT_ID}
+            client-secret: ${OAUTH_GOOGLE_CLIENT_SECRET}
 
 management:
   endpoints:
