@@ -14,6 +14,9 @@ spring:
           google:
             client-id: ${OAUTH_GOOGLE_CLIENT_ID}
             client-secret: ${OAUTH_GOOGLE_CLIENT_SECRET}
+          custom-auth:
+            client-id: abcd-client-id
+            client-secret: abcd-client-secret
 
 management:
   endpoints:

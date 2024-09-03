@@ -1,0 +1,18 @@
+server:
+  port: 9090
+
+logging:
+  level:
+    org.springframework.security: trace
+
+spring:
+  security:
+    user:
+      name: user
+      password: password
+    oauth2:
+      authorizationserver:
+        client:
+          my-client:
+            client-id: abcd-client-id
+            client-secret: "{noop}abcd-client-secret"
