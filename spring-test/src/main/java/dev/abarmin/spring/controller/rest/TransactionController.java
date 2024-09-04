@@ -6,6 +6,7 @@ import dev.abarmin.spring.model.GetTransactionsResponse;
 import dev.abarmin.spring.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @GetMapping
-    public ResponseEntity<GetTransactionsResponse> getTransactions() {
+    public ResponseEntity<GetTransactionsResponse> getTransactions(Authentication authentication) {
         return ResponseEntity.ok(new GetTransactionsResponse(transactionService.findAll()));
     }
 

@@ -36,7 +36,7 @@ class TransactionControllerUnitTest {
         when(transactionService.findAll()).thenReturn(transactions);
 
         final ResponseEntity<GetTransactionsResponse> entity =
-                transactionController.getTransactions();
+                transactionController.getTransactions(null);
 
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(entity.getBody()).isNotNull();

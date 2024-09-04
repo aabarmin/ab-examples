@@ -46,8 +46,10 @@ public class SecurityConfiguration {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .securityMatcher("/transactions")
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .authorizeHttpRequests(authorise -> authorise
-                        .anyRequest().permitAll())
+                        .anyRequest().hasAuthority("user")
+                )
                 .build();
     }
 
