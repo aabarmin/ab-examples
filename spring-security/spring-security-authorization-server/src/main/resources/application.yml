@@ -20,15 +20,16 @@ spring:
               authorization-grant-types:
                 - "authorization_code"
                 - "refresh_token"
+                - "client_credentials"
               redirect-uris:
-                - "http://127.0.0.1:8080/login/oauth2/code/oidc-client"
+                - "http://localhost:8080/login/oauth2/code/local-server1"
               post-logout-redirect-uris:
-                - "http://127.0.0.1:8080/"
+                - "http://localhost:8080/"
               scopes:
                 - "openid"
                 - "profile"
             require-authorization-consent: true
-        issuer: http://localhost:9090
+        issuer: http://127.0.0.1:9090
 
 logging:
   level:

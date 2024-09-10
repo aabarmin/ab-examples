@@ -10,10 +10,22 @@ spring:
   security:
     oauth2:
       client:
+        provider:
+          spring:
+            issuer-uri: http://127.0.0.1:9090
         registration:
           google:
             client-id: ${OAUTH_GOOGLE_CLIENT_ID}
             client-secret: ${OAUTH_GOOGLE_CLIENT_SECRET}
+          local-server:
+            authorization-grant-type: authorization_code
+            client-authentication-method: client_secret_basic
+            provider: spring
+            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            client-id: oidc-client
+            client-secret: secret
+            client-name: My local server
+            scope: openid
 
 management:
   endpoints:
