@@ -15,7 +15,7 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
-@Configuration
+//@Configuration
 public class RSAKeyConfiguration {
     private final Path publicKeyPath = Path.of("/tmp/public.key");
     private final Path privateKeyPath = Path.of("/tmp/private.key");
