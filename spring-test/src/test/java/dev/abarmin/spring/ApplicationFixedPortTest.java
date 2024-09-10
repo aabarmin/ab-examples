@@ -8,16 +8,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.net.URI;
 
 import static dev.abarmin.spring.ApplicationTestHelper.createRequest;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ActiveProfiles("local")
 @SpringBootTest(
         properties = {"server.port=8082"},
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class ApplicationFixedPortTest {
+class ApplicationFixedPortTest {
     @TestConfiguration
     static class MyConfig {
         @MockBean
@@ -25,7 +27,7 @@ public class ApplicationFixedPortTest {
     }
 
     @Test
-    void createAndRetrieve(@Autowired TestRestTemplate restTemplate) throws Exception {
+    void createAndRetrieve(@Autowired TestRestTemplate restTemplate) {
         URI location = restTemplate.postForLocation("/transactions", createRequest());
         assertThat(location.toString()).contains("/transactions");
 

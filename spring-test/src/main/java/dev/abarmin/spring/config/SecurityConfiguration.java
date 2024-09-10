@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtIssuerAuthenticationManagerResolver;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -42,11 +43,12 @@ public class SecurityConfiguration {
 
     @Bean
     @Order(1)
-    public SecurityFilterChain restFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain restFilterChain(HttpSecurity http, JwtIssuerAuthenticationManagerResolver resolved) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .securityMatcher("/transactions")
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+//                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+                .oauth2ResourceServer(oauth2 -> oauth2.authenticationManagerResolver(resolved))
                 .authorizeHttpRequests(authorise -> authorise
                         .anyRequest().hasAuthority("user")
                 )

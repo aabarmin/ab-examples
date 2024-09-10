@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-@Configuration
+//@Configuration
 public class AESKeyConfiguration {
     private final Path secretKeyPath = Path.of("/tmp/aes.key");
 
