@@ -59,6 +59,6 @@ dependencies {
 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }
